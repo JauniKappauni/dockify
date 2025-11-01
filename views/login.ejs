@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%=title%></title>
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+  <body
+    class="bg-gray-900 text-white flex items-center justify-center min-h-screen"
+  >
+    <div class="w-full max-w-md bg-gray-800 p-8 rounded-lg shadow-lg">
+      <h1 class="text-2xl font-bold text-center mb-6"><%=title%></h1>
+      <form action="/login" method="POST" class="space-y-4">
+        <label for="identifier" class="block text-sm font-medium"
+          >Email or Username</label
+        >
+        <input
+          type="text"
+          name="identifier"
+          placeholder="Enter email or username"
+          class="w-full p-2 mt-1 bg-gray-700 text-white border border-gray-600 rounded"
+          required
+        />
+        <div class="flex justify-between items-center">
+          <label for="password" class="text-sm font-medium">Password</label>
+          <a
+            href="/forgot-password"
+            class="text-blue-400 hover:underline text-sm"
+            >Forgot password?</a
+          >
+        </div>
+        <input
+          type="password"
+          name="password"
+          placeholder="Enter password"
+          class="w-full p-2 mt-1 bg-gray-700 text-white border border-gray-600 rounded"
+          required
+        />
+        <button
+          type="submit"
+          class="w-full bg-blue-500 py-2 text-white rounded hover:bg-blue-600"
+        >
+          Login
+        </button>
+      </form>
+      <div class="mt-6 text-center text-sm">
+        <span class="text-white">No Account?</span>
+        <a href="/register" class="text-blue-400 hover:underline ml-2"
+          >Register</a
+        >
+      </div>
+      <% if (successMessages.length > 0 || errorMessages.length > 0) { %>
+      <div
+        class="hover:bg-gray-700 transition-colors duration-200 fixed bottom-4 right-4 z-50 bg-gray-800 text-white p-4 rounded-xl shadow-xl border border-gray-700"
+      >
+        <% successMessages.forEach(msg => { %>
+        <p class="text-green-600"><%= msg %></p>
+        <% }) %> <% errorMessages.forEach(msg => { %>
+        <p class="text-red-600"><%= msg %></p>
+        <% }) %>
+      </div>
+      <% } %>
+    </div>
+  </body>
+</html>

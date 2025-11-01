@@ -1,0 +1,40 @@
+<%- include('../partials/header.ejs') %>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%= title %></title>
+  </head>
+  <body class="bg-gray-900 text-white min-h-screen flex flex-col">
+    <main class="flex-grow flex justify-center">
+      <div class="bg-gray-800 rounded-lg shadow-md mt-10">
+        <table class="text-left m-8">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>User ID</th>
+              <th>Action</th>
+              <th>Details</th>
+              <th>IP Address</th>
+              <th>Created At</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <% audit_logs.forEach(log => { %>
+              <td><%= log.id %></td>
+              <td><%= log.user_id %></td>
+              <td><%= log.action %></td>
+              <td><%= log.details %></td>
+              <td><%= log.ip_address %></td>
+              <td><%= log.created_at.toLocaleString() %></td>
+            </tr>
+            <% }) %>
+          </tbody>
+        </table>
+      </div>
+    </main>
+  </body>
+</html>
+<%- include('../partials/footer.ejs') %>

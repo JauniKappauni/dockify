@@ -1,0 +1,25 @@
+<script src="https://cdn.tailwindcss.com"></script>
+
+<nav class="bg-gray-800 text-white" style="height: 10%;">
+  <div class="mx-auto flex justify-between h-full items-center px-8">
+    <div class="text-xl font-semibold">
+      <a href="<%=title%>" class="text-white hover:text-blue-400"><%=title%><a>
+    </div>
+    <div class="space-x-8">
+      <% if (!user) { %>
+        <a href="/login" class="bg-blue-500 py-2 px-4 text-white hover:bg-blue-600">Login</a>
+        <a href="/register" class="bg-blue-500 py-2 px-4 text-white hover:bg-blue-600">Register</a>
+      <% } else { %>
+        <% if (user.role === 'admin') { %>
+          <a href="/admin-dashboard" class="bg-blue-500 py-2 px-4 text-white hover:bg-blue-600">Admin-Dashboard</a>
+          <% } %>
+        <a href="/account" class="bg-blue-500 py-2 px-4 text-white hover:bg-blue-600">Account</a>
+        <a href="/activity" class="bg-blue-500 py-2 px-4 text-white hover:bg-blue-600">Activity</a>
+        <a href="/dashboard" class="bg-blue-500 py-2 px-4 text-white hover:bg-blue-600">Dashboard</a>
+        <form action="/logout" method="POST" class="inline">
+          <button type="submit" class="bg-blue-500 py-2 px-4 text-white hover:bg-blue-600">Log Out</button>
+        </form>
+      <% } %>
+    </div>
+  </div>
+</nav>

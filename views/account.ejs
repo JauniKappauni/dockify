@@ -1,0 +1,116 @@
+<%- include('../partials/header.ejs') %>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%=title%></title>
+  </head>
+  <body class="bg-gray-900 text-white min-h-screen flex flex-col">
+    <main class="flex-grow">
+    <hr />
+    <form
+      action="/change-email"
+      method="POST"
+      class="flex flex-col items-center space-y-4 mt-4"
+    >
+      <label for="newEmail" class="block text-sm font-medium">New email</label>
+      <input
+        type="text"
+        name="newEmail"
+        placeholder="Enter new email"
+        value="<%=user.email%>"
+        class="p-2 bg-gray-700 text-white border border-gray-600 rounded"
+        required
+      />
+      <button
+        type="submit"
+        class="bg-blue-500 py-2 px-4 text-white rounded hover:bg-blue-600"
+      >
+        Change Email
+      </button>
+    </form>
+    <hr />
+    <form
+      action="/change-username"
+      method="POST"
+      class="flex flex-col items-center space-y-4 mt-4"
+    >
+      <label for="newUsername" class="block text-sm font-medium"
+        >New Username</label
+      >
+      <input
+        type="text"
+        name="newUsername"
+        placeholder="Enter new username"
+        value="<%=user.username%>"
+        class="p-2 bg-gray-700 text-white border border-gray-600 rounded"
+        required
+      />
+      <button
+        type="submit"
+        class="bg-blue-500 py-2 px-4 text-white rounded hover:bg-blue-600"
+      >
+        Change Username
+      </button>
+    </form>
+    <hr />
+    <form
+      action="/change-password"
+      method="POST"
+      class="flex flex-col items-center space-y-4 mt-4"
+    >
+      <label for="newpassword" class="block text-sm font-medium"
+        >New Password</label
+      >
+      <input
+        type="text"
+        name="newpassword"
+        placeholder="Enter new password"
+        class="p-2 bg-gray-700 text-white border border-gray-600 rounded"
+        required
+      />
+      <button
+        type="submit"
+        class="bg-blue-500 py-2 px-4 text-white rounded hover:bg-blue-600"
+      >
+        Change Password
+      </button>
+    </form>
+    <hr />
+    <form method="post" action="/2fa/deactivate" class="flex flex-col items-center space-y-4 mt-4">
+    <label class="block text-sm font-medium">2FA Status: <%= user.twofa_enabled ? "Enabled" : "Disabled" %></label>
+    <% if (user.twofa_enabled) { %>
+      <input type="submit" class="bg-red-500 py-2 px-4 text-white rounded hover:bg-red-600" value="Deactivate 2FA">
+    <% } else { %>
+    <a href="/2fa/setup" class="bg-blue-500 py-2 px-4 text-white rounded hover:bg-blue-600">2FA Setup</a>
+    <% } %>
+    </form>
+    <hr>
+    <form
+      action="/delete-account"
+      method="POST"
+      class="flex flex-col items-center space-y-4 mt-4"
+    >
+      <button
+        type="submit"
+        class="bg-red-500 py-2 px-4 text-white rounded hover:bg-blue-600"
+      >
+        Delete Account
+      </button>
+    </form>
+    <% if (successMessages.length > 0 || errorMessages.length > 0) { %>
+    <div
+      class="hover:bg-gray-700 transition-colors duration-200 fixed bottom-4 right-4 z-50 bg-gray-800 text-white p-4 rounded-xl shadow-xl border border-gray-700"
+    >
+      <% successMessages.forEach(msg => { %>
+      <p class="text-green-600"><%= msg %></p>
+      <% }) %> <% errorMessages.forEach(msg => { %>
+      <p class="text-red-600"><%= msg %></p>
+      <% }) %>
+    </div>
+    <% } %>
+  </body>
+  </main>
+</html>
+<%- include('../partials/footer.ejs') %>

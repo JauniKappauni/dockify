@@ -1,0 +1,111 @@
+<%- include('../partials/header.ejs') %>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%= title %></title>
+  </head>
+
+  <body class="bg-gray-900 text-white">
+    <h1 class="text-2xl font-bold text-center mt-4"><%= title %></h1>
+    <h2 class="text-2xl font-bold text-center mt-4">
+      Hello <%= user.role %> <%= user.email %>
+    </h2>
+    <div class="flex flex-wrap justify-center gap-6 mt-4"></div>
+    <h1 class="text-2xl font-bold text-center mt-4">User List</h1>
+    <div class="bg-gray-800 p-8 rounded-lg shadow-md m-4">
+      <table class="text-left mx-auto mt-4">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Email</th>
+            <th>Username</th>
+            <th>Password</th>
+            <th>Reset Token</th>
+            <th>Reset Expires</th>
+            <th>Role</th>
+            <th>Created at</th>
+            <th>Last Login</th>
+            <th>Verified</th>
+            <th>Verification Token</th>
+            <th>New Email</th>
+            <th>Email Change Token</th>
+            <th>Twofa Secret</th>
+            <th>Twofa Enabled</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% users.forEach(user=> { %>
+          <tr>
+            <td><%= user.id %></td>
+            <td><%= user.email %></td>
+            <td><%= user.username %></td>
+            <td><%= user.password %></td>
+            <td><%= user.reset_token %></td>
+            <td><%= user.reset_expires %></td>
+            <td><%= user.role %></td>
+            <td><%= user.created_at.toLocaleString() %></td>
+            <td><%= user.last_login %></td>
+            <td><%= user.verified %></td>
+            <td><%= user.verification_token %></td>
+            <td><%= user.new_email %></td>
+            <td><%= user.email_change_token %></td>
+            <td><%= user.twofa_secret %></td>
+            <td><%= user.twofa_enabled %></td>
+          </tr>
+          <% }) %>
+        </tbody>
+      </table>
+    </div>
+    <form
+      action="/delete-user"
+      method="POST"
+      class="flex flex-col items-center space-y-4 mt-4"
+    >
+      <input
+        type="text"
+        name="id"
+        placeholder="Enter id"
+        class="p-2 bg-gray-700 text-white border border-gray-600 rounded"
+        required
+      />
+      <button
+        type="submit"
+        class="bg-blue-500 py-2 px-4 text-white rounded hover:bg-blue-600"
+      >
+        Delete User
+      </button>
+    </form>
+    <br />
+    <hr />
+    <h1 class="text-2xl font-bold text-center mt-4">Audit Logs</h1>
+    <div class="bg-gray-800 p-8 rounded-lg shadow-md m-4">
+      <table class="text-left mx-auto mt-4">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>User_id</th>
+            <th>Action</th>
+            <th>Details</th>
+            <th>IP_Address</th>
+            <th>Created_at</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% audit_logs.forEach(log=> { %>
+          <tr>
+            <td><%= log.id %></td>
+            <td><%= log.user_id %></td>
+            <td><%= log.action %></td>
+            <td><%= log.details %></td>
+            <td><%= log.ip_address %></td>
+            <td><%= log.created_at.toLocaleString() %></td>
+          </tr>
+          <% }) %>
+        </tbody>
+      </table>
+    </div>
+  </body>
+</html>
+<%- include('../partials/footer.ejs') %>
